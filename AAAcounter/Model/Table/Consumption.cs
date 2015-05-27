@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace AAAcounter.Model
 {
+    /// <summary>
+    /// 单次消费记录
+    /// </summary>
     public class Consumption : ITable
     {
         [AutoIncrement]
@@ -32,10 +35,10 @@ namespace AAAcounter.Model
         public int PeopleCount { get; set; }
 
         [Ignore]
-        public List<ConsumptionDetaiItemlList> Items { get; set; }
+        public List<ConsumptionItemlList> Items { get; set; }
 
         [Ignore]
-        public List<ConsumptionDetailConsumerList> People { get; set; }
+        public List<ConsumptionConsumerList> People { get; set; }
 
     }
 }

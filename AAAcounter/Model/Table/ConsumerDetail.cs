@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace AAAcounter.Model
 {
+    /// <summary>
+    /// 个人消费明细
+    /// </summary>
     public class ConsumerDetail : ITable
     {
         [AutoIncrement]
@@ -33,6 +36,14 @@ namespace AAAcounter.Model
 
         public DetailType DetailType { get; set; }
 
+        /// <summary>
+        /// 关联的个人Id
+        /// </summary>
         public int ConsumerId { get; set; }
+
+        /// <summary>
+        /// 关联的单次消费记录
+        /// </summary>
+        public int ConsumptionId { get; set; }
     }
 }

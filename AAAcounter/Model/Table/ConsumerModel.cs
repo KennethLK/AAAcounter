@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace AAAcounter.Model
 {
+    /// <summary>
+    /// 个人信息
+    /// </summary>
     public class ConsumerModel : ITable
     {
         public ConsumerModel()

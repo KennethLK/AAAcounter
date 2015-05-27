@@ -15,9 +15,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace AAAcounter.View
 {
-    internal class AAViewController : ViewControllerBase<AA>
+    internal class AAViewController : ViewControllerBase<AAPage>
     {
-        public AAViewController(AA page) : base(page)
+        public AAViewController(AAPage page) : base(page)
         {
         }
     }

@@ -25,7 +25,8 @@ namespace AAAcounter
     public sealed partial class MainPage : Page
     {
         MainViewController _viewController = null;
-        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"[a-zA-Z0-9_@\.]{6}");
+
+        System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@".{1,}");
 
         public MainPage()
         {
@@ -114,12 +115,66 @@ namespace AAAcounter
         {
             Grid_Login.Visibility = Visibility.Collapsed;
             frame.Visibility = Visibility.Visible;
+
+            BottomBar.Visibility = Visibility.Visible;
+            BottomBar.SetSource(CreateBarItemList().ToList());
+        }
+
+        private IEnumerable<BottomMenuItem> CreateBarItemList()
+        {
+            BottomMenuItem newRec = new BottomMenuItem {
+                Icon = new SymbolIcon(Symbol.Add),
+                Lable = "新增收支",
+                TappedAction = ViewConsumption
+            };
+            yield return newRec;
+            BottomMenuItem viewRec = new BottomMenuItem
+            {
+                Icon = new SymbolIcon(Symbol.Add),
+                Lable = "个人消费",
+                TappedAction = ViewConsumerDetail
+            };
+            yield return viewRec;
+            BottomMenuItem viewOwn = new BottomMenuItem
+            {
+                Icon = new SymbolIcon(Symbol.Add),
+                Lable = "团队消费",
+                TappedAction = ViewConsumption
+            };
+            yield return viewOwn;
+            BottomMenuItem viewTeam = new BottomMenuItem
+            {
+                Icon = new SymbolIcon(Symbol.Add),
+                Lable = "团队",
+                TappedAction = ViewConsumer
+            };
+            yield return viewTeam;
+        }
+
+        private void ViewConsumerDetail()
+        {
+            NavigateTo(typeof(ConsumerDetailPage), null);
+        }
+
+        private void ViewConsumer()
+        {
+            NavigateTo(typeof(ConsumerPage), null);
+        }
+
+        private void ViewConsumption()
+        {
+            NavigateTo(typeof(ConsumptionPage), null);
         }
 
         private void ShowLoginBox()
         {
             Grid_Login.Visibility = Visibility.Visible;
             frame.Visibility = Visibility.Collapsed;
+        }
+
+        public void NavigateTo(Type page, object parameter)
+        {
+            frame.Navigate(page, parameter);
         }
     }
 }

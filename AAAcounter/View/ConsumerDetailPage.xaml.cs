@@ -20,30 +20,11 @@ namespace AAAcounter.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AA : Page
+    public sealed partial class ConsumerDetailPage : Page
     {
-        AAViewController _viewController = null;
-
-        public AA()
+        public ConsumerDetailPage()
         {
             this.InitializeComponent();
-
-            Loaded += AA_Loaded;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            MainViewController mvc = (MainViewController)e.Parameter;
-            if (_viewController == null)
-                _viewController = new AAViewController(this);
-
-            _viewController.Initialize(mvc);
-        }
-
-        private void AA_Loaded(object sender, RoutedEventArgs e)
-        {
-            _viewController = new AAViewController(this);
         }
     }
 }

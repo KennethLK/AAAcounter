@@ -24,6 +24,7 @@ namespace AAAcounter.View
 
         public MainViewController(MainPage page)
         {
+            _controller = new MainController();
             _page = page;
         }
 
@@ -34,7 +35,7 @@ namespace AAAcounter.View
 
         public async Task<bool> Register(string user, string pwd)
         {
-            throw new NotImplementedException();
+            return await _controller.Register(user, pwd);
         }
 
         public Task<bool> CheckLogin()

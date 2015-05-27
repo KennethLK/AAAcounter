@@ -20,9 +20,9 @@ namespace AAAcounter.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Consumer : Page
+    public sealed partial class AutoAAPage : Page
     {
-        public Consumer()
+        public AutoAAPage()
         {
             this.InitializeComponent();
         }

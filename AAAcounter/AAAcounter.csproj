@@ -98,37 +98,43 @@
     <Compile Include="Model\Algorithm\Base64Encoder.cs" />
     <Compile Include="Model\Algorithm\CRC32.cs" />
     <Compile Include="Model\Algorithm\MD5.cs" />
+    <Compile Include="Model\Logger.cs" />
     <Compile Include="Model\Table\ConsumerDetail.cs" />
     <Compile Include="Model\Table\ConsumerModel.cs" />
     <Compile Include="Model\Table\Consumption.cs" />
-    <Compile Include="Model\Table\ConsumptionDetaiItemlList.cs" />
-    <Compile Include="Model\Table\ConsumptionDetailConsumerList.cs" />
     <Compile Include="Model\Database\DBModel.cs" />
     <Compile Include="Model\Database\IDBModel.cs" />
     <Compile Include="Model\Database\ITable.cs" />
+    <Compile Include="Model\Table\ConsumptionConsumerList.cs" />
+    <Compile Include="Model\Table\ConsumptionItemlList.cs" />
     <Compile Include="Model\Type\DetailType.cs" />
     <Compile Include="Model\Extension\ObjectExtension.cs" />
     <Compile Include="Model\Database\SQLite.cs" />
     <Compile Include="Model\Database\SQLiteAsync.cs" />
     <Compile Include="Model\Type\PlaceType.cs" />
-    <Compile Include="View\AA.xaml.cs">
-      <DependentUpon>AA.xaml</DependentUpon>
+    <Compile Include="View\AAPage.xaml.cs">
+      <DependentUpon>AAPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AutoAA.xaml.cs">
-      <DependentUpon>AutoAA.xaml</DependentUpon>
+    <Compile Include="View\AutoAAPage.xaml.cs">
+      <DependentUpon>AutoAAPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Consumer.xaml.cs">
-      <DependentUpon>Consumer.xaml</DependentUpon>
+    <Compile Include="View\ConsumerPage.xaml.cs">
+      <DependentUpon>ConsumerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ConsumptionList.xaml.cs">
-      <DependentUpon>ConsumptionList.xaml</DependentUpon>
+    <Compile Include="View\ConsumptionPage.xaml.cs">
+      <DependentUpon>ConsumptionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Control\BottomMenuBar.xaml.cs">
+      <DependentUpon>BottomMenuBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SafeRise.cs" />
+    <Compile Include="View\Control\StoryboardHelper.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\PersonalList.xaml.cs">
-      <DependentUpon>PersonalList.xaml</DependentUpon>
+    <Compile Include="View\ConsumerDetailPage.xaml.cs">
+      <DependentUpon>ConsumerDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SingleAA.xaml.cs">
       <DependentUpon>SingleAA.xaml</DependentUpon>
@@ -161,27 +167,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\AA.xaml">
+    <Page Include="View\AAPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AutoAA.xaml">
+    <Page Include="View\AutoAAPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Consumer.xaml">
+    <Page Include="View\ConsumerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ConsumptionList.xaml">
+    <Page Include="View\ConsumptionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Control\BottomMenuBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\PersonalList.xaml">
+    <Page Include="View\ConsumerDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

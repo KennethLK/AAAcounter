@@ -98,15 +98,18 @@
     <Compile Include="Model\Algorithm\Base64Encoder.cs" />
     <Compile Include="Model\Algorithm\CRC32.cs" />
     <Compile Include="Model\Algorithm\MD5.cs" />
-    <Compile Include="Model\Logger.cs" />
+    <Compile Include="Model\Const\DefaultStrings.cs" />
+    <Compile Include="Model\Helper\Logger.cs" />
     <Compile Include="Model\Table\ConsumerDetail.cs" />
+    <Compile Include="Model\Table\ConsumerDetailItemList.cs" />
     <Compile Include="Model\Table\ConsumerModel.cs" />
+    <Compile Include="Model\Table\ConsumerType.cs" />
     <Compile Include="Model\Table\Consumption.cs" />
     <Compile Include="Model\Database\DBModel.cs" />
     <Compile Include="Model\Database\IDBModel.cs" />
     <Compile Include="Model\Database\ITable.cs" />
-    <Compile Include="Model\Table\ConsumptionConsumerList.cs" />
-    <Compile Include="Model\Table\ConsumptionItemlList.cs" />
+    <Compile Include="Model\Table\ConsumptionItemList.cs" />
+    <Compile Include="Model\Table\Place.cs" />
     <Compile Include="Model\Type\DetailType.cs" />
     <Compile Include="Model\Extension\ObjectExtension.cs" />
     <Compile Include="Model\Database\SQLite.cs" />
@@ -127,7 +130,7 @@
     <Compile Include="View\Control\BottomMenuBar.xaml.cs">
       <DependentUpon>BottomMenuBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\SafeRise.cs" />
+    <Compile Include="Model\Helper\SafeRise.cs" />
     <Compile Include="View\Control\StoryboardHelper.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

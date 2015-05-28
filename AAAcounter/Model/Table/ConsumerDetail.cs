@@ -24,6 +24,7 @@ namespace AAAcounter.Model
         [PrimaryKey]
         public int Id { get; set; }
 
+        [Ignore]
         public string ChangedProp { get; set; }
 
         public string Place { get; set; }
@@ -45,5 +46,8 @@ namespace AAAcounter.Model
         /// 关联的单次消费记录
         /// </summary>
         public int ConsumptionId { get; set; }
+
+        [Ignore]
+        public List<ConsumptionItemList> Items { get; set; }
     }
 }

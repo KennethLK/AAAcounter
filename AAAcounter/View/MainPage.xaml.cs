@@ -30,10 +30,14 @@ namespace AAAcounter
 
         public MainPage()
         {
+            this.DataContext = this;
+            AppName = "AA帐本";
             this.InitializeComponent();
             _viewController = new MainViewController(this);
             Loaded += MainPage_Loaded;
         }
+
+        public string AppName { get; set; }
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -113,9 +117,10 @@ namespace AAAcounter
 
         private void CloseLoginBox()
         {
+            tbl_user.Text = _viewController.Consumer.Name;
             Grid_Login.Visibility = Visibility.Collapsed;
             frame.Visibility = Visibility.Visible;
-
+            btn_logout.Visibility = Visibility.Visible;
             BottomBar.Visibility = Visibility.Visible;
             BottomBar.SetSource(CreateBarItemList().ToList());
         }
@@ -130,21 +135,21 @@ namespace AAAcounter
             yield return newRec;
             BottomMenuItem viewRec = new BottomMenuItem
             {
-                Icon = new SymbolIcon(Symbol.Add),
+                Icon = new SymbolIcon(Symbol.ContactPresence),
                 Lable = "个人消费",
                 TappedAction = ViewConsumerDetail
             };
             yield return viewRec;
             BottomMenuItem viewOwn = new BottomMenuItem
             {
-                Icon = new SymbolIcon(Symbol.Add),
+                Icon = new SymbolIcon(Symbol.Font),
                 Lable = "团队消费",
                 TappedAction = ViewConsumption
             };
             yield return viewOwn;
             BottomMenuItem viewTeam = new BottomMenuItem
             {
-                Icon = new SymbolIcon(Symbol.Add),
+                Icon = new SymbolIcon(Symbol.People),
                 Lable = "团队",
                 TappedAction = ViewConsumer
             };
@@ -168,7 +173,9 @@ namespace AAAcounter
 
         private void ShowLoginBox()
         {
+            btn_logout.Visibility = Visibility.Visible;
             Grid_Login.Visibility = Visibility.Visible;
+            BottomBar.Visibility = Visibility.Collapsed;
             frame.Visibility = Visibility.Collapsed;
         }
 

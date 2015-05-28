@@ -24,6 +24,7 @@ namespace AAAcounter.Model
         [PrimaryKey]
         public int Id { get; set; }
 
+        [Ignore]
         public string ChangedProp { get; set; }
 
         public string Place { get; set; }
@@ -34,11 +35,13 @@ namespace AAAcounter.Model
 
         public int PeopleCount { get; set; }
 
-        [Ignore]
-        public List<ConsumptionItemlList> Items { get; set; }
+        public double CreateDate { get; set; }
 
         [Ignore]
-        public List<ConsumptionConsumerList> People { get; set; }
+        public List<ConsumptionItemList> Items { get; set; }
+
+        [Ignore]
+        public List<ConsumerModel> People { get; set; }
 
     }
 }

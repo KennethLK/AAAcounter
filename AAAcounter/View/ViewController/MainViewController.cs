@@ -47,5 +47,17 @@ namespace AAAcounter.View
         {
             _controller.Logout();
         }
+
+        public async Task<List<ConsumerModel>> GetConsumerList()
+        {
+            return await _controller.GetConsumerList();
+        }
+
+        public async Task<List<Consumption>> GetConsumption(ConsumerModel consumer = null)
+        {
+            return await _controller.GetConsumptionList(consumer);
+        }
+
+        public ConsumerModel Consumer { get { return _controller.Consummer; } }
     }
 }

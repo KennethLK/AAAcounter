@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AAAcounter.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,6 +29,13 @@ namespace AAAcounter.View
         public SuperMan()
         {
             this.InitializeComponent();
+            Loaded += SuperMan_Loaded;
+        }
+
+        private async void SuperMan_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ConsumerModel> consumers = await _vc.GetConsumerList();
+            listView.ItemsSource = consumers;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +47,7 @@ namespace AAAcounter.View
 
         private async void btn_commit_Click(object sender, RoutedEventArgs e)
         {
-            await _vc.Login(tbx_user.Text, "111111");
+            await _vc.Login(tbx_user.Text, DefaultStrings.DEFAULT_PWD);
         }
     }
 }

@@ -18,15 +18,16 @@ namespace AAAcounter.Model
     /// <summary>
     /// 消费明细
     /// </summary>
-    public class ConsumptionItemlList : ITable
+    public class ConsumptionItemList : ITable
     {
         [AutoIncrement]
         [PrimaryKey]
         public int Id { get; set; }
 
+        [Ignore]
         public string ChangedProp { get; set; }
 
-        public int ConsumptionDetailId { get; set; }
+        public int ConsumptionId { get; set; }
         
         public string Item { get; set; }
 

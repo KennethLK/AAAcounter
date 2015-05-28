@@ -1,9 +1,9 @@
 ﻿/* *
-* ClassName: ConsumptionDetailPeopleList
+* ClassName: ConsumerDetailItemList
 * Description: 
 *
 * Author: 李靖
-* Date: 5/26/2015 11:28:33 PM
+* Date: 5/28/2015 10:34:55 PM
 * */
 
 using SQLite;
@@ -16,18 +16,21 @@ using System.Threading.Tasks;
 namespace AAAcounter.Model
 {
     /// <summary>
-    /// 参与单次消费的人员
+    /// 个人单列消费清单
     /// </summary>
-    public class ConsumptionConsumerList : ITable
+    public class ConsumerDetailItemList : ITable
     {
         [AutoIncrement]
         [PrimaryKey]
         public int Id { get; set; }
 
+        [Ignore]
         public string ChangedProp { get; set; }
 
-        public int ConsumerId { get; set; }
+        public int ConsumerDetailId { get; set; }
 
-        public int ConsumptionId { get; set; }
+        public string Item { get; set; }
+
+        public double Price { get; set; }
     }
 }

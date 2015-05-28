@@ -49,26 +49,35 @@ namespace AAAcounter.Controller
             return await _dbModel.GetListAsync<ConsumerDetail>(condition);
         }
 
-        public async Task<List<Consumption>> GetConsumptionList()
+        public async Task<List<Consumption>> GetConsumptionList(ConsumerModel consumer)
         {
             Dictionary<string, object> condition = new Dictionary<string, object>();
-            //condition.Add("ConsumerId", _consumer.Id);
+            if (consumer != null)
+            {
+                condition.Add("ConsumerId", consumer.Id);
+            }
+            var consumerDetailList = await _dbModel.GetListAsync<ConsumerDetail>(condition);
+            condition.Clear();
+            var consumptionList = await _dbModel.GetListAsync<Consumption>(condition);
+            var result = (from a in consumerDetailList
+                          from b in consumptionList
+                          where a.ConsumptionId == b.Id && a.ConsumerId == consumer.Id
+                          select b).ToList();
             return await _dbModel.GetListAsync<Consumption>(condition);
         }
 
-        public async Task<List<ConsumptionItemlList>> ConsumptionDetaiItemlList(int consuptionId)
+        public async Task<List<ConsumptionItemList>> ConsumptionDetaiItemlList(int consuptionId)
         {
             Dictionary<string, object> condition = new Dictionary<string, object>();
             condition.Add("ConsumerId", _consumer.Id);
-            return await _dbModel.GetListAsync<ConsumptionItemlList>(condition);
+            return await _dbModel.GetListAsync<ConsumptionItemList>(condition);
         }
 
-        public async Task<List<ConsumptionConsumerList>> ConsumptionDetailConsumerList(int consuptionId)
-        {
-            Dictionary<string, object> condition = new Dictionary<string, object>();
-            //condition.Add("ConsumerId", _consumer.Id);
-            return await _dbModel.GetListAsync<ConsumptionConsumerList>(condition);
-        }
+        //public async Task<List<ConsumerDetailItemList>> ConsumptionDetailConsumerList(int consuptionId)
+        //{
+        //    Dictionary<string, object> condition = new Dictionary<string, object>();
+        //    return await _dbModel.GetListAsync<ConsumerDetailItemList>(condition);
+        //}
 
         #endregion
 
@@ -99,6 +108,10 @@ namespace AAAcounter.Controller
             _consumer = (await _dbModel.GetListAsync<ConsumerModel>(condition)).FirstOrDefault();
             if (_consumer != null)
             {
+                if (_consumer.Password == EncryptPwd(DefaultStrings.DEFAULT_PWD))
+                {
+
+                }
                 return false;
             }
             else
@@ -135,8 +148,8 @@ namespace AAAcounter.Controller
         {
             if (_initialized) return;
             _initialized = true;
-            await _dbModel.CreateTablesAsync<ConsumerModel, ConsumerDetail, Consumption, ConsumptionItemlList>();
-            await _dbModel.CreateTableAsync<ConsumptionConsumerList>();
+            await _dbModel.CreateTablesAsync<ConsumerModel, ConsumerDetail, Consumption, ConsumptionItemList>();
+            //await _dbModel.CreateTableAsync<ConsumerDetailItemList>();
         }
         #endregion
 

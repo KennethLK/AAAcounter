@@ -29,6 +29,7 @@ namespace AAAcounter.Model
         [PrimaryKey]
         public int Id { get; set; }
 
+        [Ignore]
         public string ChangedProp { get; set; }
 
         public string Name { get; set; }

@@ -9,10 +9,12 @@
 using AAAcounter.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace AAAcounter.Controller
 {
@@ -24,14 +26,15 @@ namespace AAAcounter.Controller
 
         public MainController()
         {
-            string path = @"aaacount.db";
+            string path = DefaultConfig.DATABASE_NAME;
             _dbModel.OpenAsync(path);
         }
 
         #region 获取数据
         public ConsumerModel Consummer
         {
-            get {
+            get
+            {
                 return _consumer;
             }
         }
@@ -47,6 +50,76 @@ namespace AAAcounter.Controller
             Dictionary<string, object> condition = new Dictionary<string, object>();
             condition.Add("ConsumerId", _consumer.Id);
             return await _dbModel.GetListAsync<ConsumerDetail>(condition);
+        }
+
+        public async Task<List<ConsumerModel>> InitialConsumers()
+        {
+            List<ConsumerModel> consumers = new List<ConsumerModel>();
+            consumers.Add(new ConsumerModel
+            {
+                Balance = 0,
+                CreateDate = DateTime.Now.GetMili1970(),
+                Name = "李靖",
+                Password = EncryptPwd(DefaultConfig.DEFAULT_PWD),
+                Saving = 100,
+                Spending = 0
+            });
+            consumers.Add(new ConsumerModel
+            {
+                Balance = 0,
+                CreateDate = DateTime.Now.GetMili1970(),
+                Name = "龚彦铭",
+                Password = EncryptPwd(DefaultConfig.DEFAULT_PWD),
+                Saving = 100,
+                Spending = 0
+            });
+            consumers.Add(new ConsumerModel
+            {
+                Balance = 0,
+                CreateDate = DateTime.Now.GetMili1970(),
+                Name = "敬亮",
+                Password = EncryptPwd(DefaultConfig.DEFAULT_PWD),
+                Saving = 100,
+                Spending = 0
+            });
+            consumers.Add(new ConsumerModel
+            {
+                Balance = 0,
+                CreateDate = DateTime.Now.GetMili1970(),
+                Name = "田龙",
+                Password = EncryptPwd(DefaultConfig.DEFAULT_PWD),
+                Saving = 100,
+                Spending = 0
+            });
+            consumers.Add(new ConsumerModel
+            {
+                Balance = 0,
+                CreateDate = DateTime.Now.GetMili1970(),
+                Name = "刘明悦",
+                Password = EncryptPwd(DefaultConfig.DEFAULT_PWD),
+                Saving = 100,
+                Spending = 0
+            });
+            consumers.Add(new ConsumerModel
+            {
+                Balance = 0,
+                CreateDate = DateTime.Now.GetMili1970(),
+                Name = "王池",
+                Password = EncryptPwd(DefaultConfig.DEFAULT_PWD),
+                Saving = 100,
+                Spending = 0
+            });
+            consumers.Add(new ConsumerModel
+            {
+                Balance = 0,
+                CreateDate = DateTime.Now.GetMili1970(),
+                Name = "郝鹏",
+                Password = EncryptPwd(DefaultConfig.DEFAULT_PWD),
+                Saving = 100,
+                Spending = 0
+            });
+            await _dbModel.InsertAllAsync<ConsumerModel>(consumers);
+            return consumers;
         }
 
         public async Task<List<Consumption>> GetConsumptionList(ConsumerModel consumer)
@@ -66,18 +139,22 @@ namespace AAAcounter.Controller
             return await _dbModel.GetListAsync<Consumption>(condition);
         }
 
+        public async Task SaveConsumptionItems(List<ConsumptionItemList> citems)
+        {
+            await _dbModel.InsertAllAsync<ConsumptionItemList>(citems);
+        }
+
+        public async Task AddConsumption(Consumption con)
+        {
+            await _dbModel.InsertOneAsync<Consumption>(con);
+        }
+
         public async Task<List<ConsumptionItemList>> ConsumptionDetaiItemlList(int consuptionId)
         {
             Dictionary<string, object> condition = new Dictionary<string, object>();
             condition.Add("ConsumerId", _consumer.Id);
             return await _dbModel.GetListAsync<ConsumptionItemList>(condition);
         }
-
-        //public async Task<List<ConsumerDetailItemList>> ConsumptionDetailConsumerList(int consuptionId)
-        //{
-        //    Dictionary<string, object> condition = new Dictionary<string, object>();
-        //    return await _dbModel.GetListAsync<ConsumerDetailItemList>(condition);
-        //}
 
         #endregion
 
@@ -95,6 +172,7 @@ namespace AAAcounter.Controller
             }
             else
             {
+                await SaveLogon(_consumer);
                 return true;
             }
         }
@@ -103,15 +181,11 @@ namespace AAAcounter.Controller
         {
             pwd = EncryptPwd(pwd);
             Dictionary<string, object> condition = new Dictionary<string, object>();
-            condition.Add("Name", user);
-            condition.Add("Password", pwd);
+            condition.Add(nameof(_consumer.Name), user);
+            condition.Add(nameof(_consumer.Password), pwd);
             _consumer = (await _dbModel.GetListAsync<ConsumerModel>(condition)).FirstOrDefault();
             if (_consumer != null)
             {
-                if (_consumer.Password == EncryptPwd(DefaultStrings.DEFAULT_PWD))
-                {
-
-                }
                 return false;
             }
             else
@@ -131,14 +205,65 @@ namespace AAAcounter.Controller
 
         public async Task<bool> CheckLogin()
         {
+            bool result = false;
             await InitializeDatabase();
-            Dictionary<string, object> condition = new Dictionary<string, object>();
-            _consumer = (await _dbModel.GetListAsync<ConsumerModel>(condition)).FirstOrDefault();
-            return _consumer != null;
+            result = await LoadLogon();
+            var consumers = await GetConsumerList();
+            if (consumers.Count == 0)
+            {
+                consumers = await InitialConsumers();
+            }
+            return result;
         }
 
-        public void Logout()
+        private async Task SaveLogon(ConsumerModel consumer)
         {
+            StorageFile configFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DefaultConfig.CONFIG_FILE_NAME);
+            await FileIO.WriteTextAsync(configFile, string.Format("{0}\r\n{1}" , consumer.Name, consumer.Password));
+            configFile = null;
+        }
+
+        private async Task<bool> LoadLogon()
+        {
+            bool result = false;
+            string configFileName = DefaultConfig.CONFIG_FILE_NAME;
+            StorageFile configFile = null;
+            string logonUser = "";
+            string logonPwd = "";
+            var finder = await ApplicationData.Current.LocalFolder.TryGetItemAsync(configFileName);
+            if (finder != null)
+            {
+                configFile = finder as StorageFile;
+                string content = await FileIO.ReadTextAsync(configFile, DefaultConfig.ENCODING);
+                if (!string.IsNullOrEmpty(content))
+                {
+                    StringReader sr = new StringReader(content);
+                    logonUser = sr.ReadLine();
+                    if (!string.IsNullOrEmpty(logonUser))
+                        logonPwd = sr.ReadLine();
+
+                    configFile = null;
+
+                    Dictionary<string, object> condition = new Dictionary<string, object>();
+                    condition.Add("Name", logonUser);
+                    condition.Add("Password", logonPwd);
+                    _consumer = (await _dbModel.GetListAsync<ConsumerModel>(condition)).FirstOrDefault();
+                    result = _consumer != null;
+                }
+            }
+            else
+            {
+                configFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(configFileName);
+            }
+            finder = null;
+            return result;
+        }
+
+        public async void Logout()
+        {
+            _consumer.Name = "";
+            _consumer.Password = "";
+            await SaveLogon(_consumer);
             _consumer = null;
         }
         #endregion
@@ -149,12 +274,11 @@ namespace AAAcounter.Controller
             if (_initialized) return;
             _initialized = true;
             await _dbModel.CreateTablesAsync<ConsumerModel, ConsumerDetail, Consumption, ConsumptionItemList>();
-            //await _dbModel.CreateTableAsync<ConsumerDetailItemList>();
         }
         #endregion
 
         #region 算法
-        string EncryptPwd(string pwd)
+        public string EncryptPwd(string pwd)
         {
             return MD5.Md5(MD5.Md5(pwd) + "L0gin");
         }

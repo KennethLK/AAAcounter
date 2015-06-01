@@ -8,9 +8,9 @@
     mc:Ignorable="d">
     <Grid x:Name="grid" Background="#FFECECEC">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid Background="Red">
             <Grid.ColumnDefinitions>
@@ -22,7 +22,7 @@
             <TextBlock Text="{Binding AppName}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="21.333" FontWeight="Bold" FontFamily="SimHei" Foreground="#FFFFDE0E" />
             <Button BorderThickness="0" Name="btn_logout" Content="退出" Visibility="Collapsed" Click="btn_logout_Click" Grid.Column="2" Background="{x:Null}" HorizontalAlignment="Right" Margin="0,0,10,0" />
         </Grid>
-        <Frame Name="frame" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Frame Name="frame" Grid.Row="1" HorizontalAlignment="Stretch" />
         <local:BottomMenuBar x:Name="BottomBar" Grid.Row="2" Background="{Binding Background, ElementName=grid}" />
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#99000000" Name="Grid_Login" Grid.RowSpan="3">
             <Grid.RowDefinitions>

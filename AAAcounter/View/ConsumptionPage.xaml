@@ -6,8 +6,39 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="PeopleItem">
+            <Grid>
+                <Button x:Name="button" Content="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MoneyItem">
+            <Grid>
+                <Button x:Name="button" Content="{Binding Money}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ConsumptionItem">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding CreateDate}" />
+                <TextBlock Text="{Binding Place}" />
+                <TextBlock Text="{Binding ConsumptionType}" />
+                <ListBox ItemsSource="{Binding People}" ItemTemplate="{StaticResource PeopleItem}" />
+                <ListBox ItemsSource="{Binding Money}" ItemTemplate="{StaticResource MoneyItem}"/>
+
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <GridView ItemTemplate="{StaticResource ConsumptionItem}" >
+        </GridView>
     </Grid>
 </Page>

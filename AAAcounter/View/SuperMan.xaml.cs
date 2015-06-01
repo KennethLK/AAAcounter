@@ -44,10 +44,5 @@ namespace AAAcounter.View
 
             _vc = (MainViewController)(e.Parameter);
         }
-
-        private async void btn_commit_Click(object sender, RoutedEventArgs e)
-        {
-            await _vc.Login(tbx_user.Text, DefaultStrings.DEFAULT_PWD);
-        }
     }
 }

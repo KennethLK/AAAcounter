@@ -15,19 +15,6 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="60"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="用户名称" VerticalAlignment="Center"/>
-        <TextBox x:Name="tbx_user" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Grid.Column="1" Margin="0" MinWidth="120" Padding="23,3,6,5" />
         <ListView x:Name="listView" Grid.ColumnSpan="2" Margin="0" Grid.Row="1" ItemTemplate="{StaticResource ListViewItemTemplate}"/>
-        <Button x:Name="btn_commit" Content="提交" Grid.Column="2" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Click="btn_commit_Click"/>
-
     </Grid>
 </Page>

@@ -25,6 +25,12 @@ namespace AAAcounter.View
         public ConsumptionPage()
         {
             this.InitializeComponent();
+            Loaded += ConsumptionPage_Loaded;
+        }
+
+        private void ConsumptionPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

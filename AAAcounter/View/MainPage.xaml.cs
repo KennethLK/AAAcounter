@@ -24,6 +24,7 @@ namespace AAAcounter
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region 初始化
         MainViewController _viewController = null;
 
         System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@".{1,}");
@@ -46,7 +47,9 @@ namespace AAAcounter
                 CloseLoginBox();
             }
         }
+        #endregion
 
+        #region 登录 注册 退出
         private async void btn_login_Click(object sender, RoutedEventArgs e)
         {
             string user = tbx_user.Text;
@@ -124,13 +127,22 @@ namespace AAAcounter
             BottomBar.Visibility = Visibility.Visible;
             BottomBar.SetSource(CreateBarItemList().ToList());
         }
+        private void ShowLoginBox()
+        {
+            btn_logout.Visibility = Visibility.Visible;
+            Grid_Login.Visibility = Visibility.Visible;
+            BottomBar.Visibility = Visibility.Collapsed;
+            frame.Visibility = Visibility.Collapsed;
+        }
+        #endregion
 
+        #region 初始化菜单
         private IEnumerable<BottomMenuItem> CreateBarItemList()
         {
             BottomMenuItem newRec = new BottomMenuItem {
                 Icon = new SymbolIcon(Symbol.Add),
                 Lable = "新增收支",
-                TappedAction = ViewConsumption
+                TappedAction = AddConsumption
             };
             yield return newRec;
             BottomMenuItem viewRec = new BottomMenuItem
@@ -156,28 +168,26 @@ namespace AAAcounter
             yield return viewTeam;
         }
 
+        private void AddConsumption()
+        {
+            NavigateTo(typeof(AutoAAPage), _viewController);
+        }
+
         private void ViewConsumerDetail()
         {
-            NavigateTo(typeof(ConsumerDetailPage), null);
+            NavigateTo(typeof(ConsumerDetailPage), _viewController);
         }
 
         private void ViewConsumer()
         {
-            NavigateTo(typeof(ConsumerPage), null);
+            NavigateTo(typeof(ConsumerPage), _viewController);
         }
 
         private void ViewConsumption()
         {
-            NavigateTo(typeof(ConsumptionPage), null);
+            NavigateTo(typeof(ConsumptionPage), _viewController);
         }
-
-        private void ShowLoginBox()
-        {
-            btn_logout.Visibility = Visibility.Visible;
-            Grid_Login.Visibility = Visibility.Visible;
-            BottomBar.Visibility = Visibility.Collapsed;
-            frame.Visibility = Visibility.Collapsed;
-        }
+        #endregion
 
         public void NavigateTo(Type page, object parameter)
         {

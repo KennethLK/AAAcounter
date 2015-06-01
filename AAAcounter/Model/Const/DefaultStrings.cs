@@ -9,13 +9,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.Streams;
 
 namespace AAAcounter.Model
 {
-    public class DefaultStrings
+    public class DefaultConfig
     {
         public const string DEFAULT_PWD = "111111";
+
+        public const string CONFIG_FILE_NAME = "setting.config";
+
+        public const string DATABASE_NAME = "aaacount.db";
+
+        public static readonly UnicodeEncoding ENCODING = UnicodeEncoding.Utf8;
     }
 }

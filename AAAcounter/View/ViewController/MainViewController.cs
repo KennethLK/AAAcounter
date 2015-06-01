@@ -59,5 +59,21 @@ namespace AAAcounter.View
         }
 
         public ConsumerModel Consumer { get { return _controller.Consummer; } }
+
+        public async Task AddConsumption(Consumption con)
+        {
+            await _controller.AddConsumption(con);
+        }
+
+        public async Task SaveConsumptionItems(List<ConsumptionItemList> citems)
+        {
+            await _controller.SaveConsumptionItems(citems);
+        }
+
+        public void NavigateTo(Type type)
+        {
+            if (_page.Frame
+            _page.NavigateTo(type, this);
+        }
     }
 }

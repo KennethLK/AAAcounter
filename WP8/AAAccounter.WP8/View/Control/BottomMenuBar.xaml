@@ -1,0 +1,26 @@
+﻿<UserControl
+    x:Class="AAAccounter.View.BottomMenuBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Sight.Windows10.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="800"
+    d:DesignWidth="400">
+    
+    <Grid   >
+        <Canvas x:Name="Canvas_Touch" Visibility="Collapsed" Background="Transparent" PointerPressed="Canvas_PointerPressed"/>
+        <Grid x:Name="Grid_Root" Background="#CCCFCFCF" VerticalAlignment="Bottom" Height="56" Margin="0,0,0,-12">
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            <Border Background="Transparent" Width="55" PointerPressed="More_PointerPressed" HorizontalAlignment="Right" Margin="0,0,0,12" d:LayoutOverrides="TopPosition, BottomPosition">
+                <SymbolIcon Symbol="More"/>
+            </Border>      
+            <StackPanel x:Name="StackPanel_Bar" Orientation="Horizontal" FlowDirection="RightToLeft" d:LayoutOverrides="TopPosition, BottomPosition" Margin="58,0,58,12"/> 
+        </Grid> 
+
+      
+    </Grid>
+</UserControl>

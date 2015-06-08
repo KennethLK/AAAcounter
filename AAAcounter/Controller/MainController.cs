@@ -6,7 +6,7 @@
 * Date: 5/26/2015 11:14:27 PM
 * */
 
-using AAAcounter.Model;
+using AAAccounter.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
 
-namespace AAAcounter.Controller
+namespace AAAccounter.Controller
 {
     public class MainController
     {
@@ -124,6 +124,9 @@ namespace AAAcounter.Controller
 
         public async Task<List<Consumption>> GetConsumptionList(ConsumerModel consumer)
         {
+            if (consumer == null)
+                consumer = _consumer;
+
             Dictionary<string, object> condition = new Dictionary<string, object>();
             if (consumer != null)
             {

@@ -7,8 +7,8 @@
     <ProjectGuid>{1DC629F2-F1B3-4ED9-AEBB-CE421134DF09}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AAAcounter</RootNamespace>
-    <AssemblyName>AAAcounter</AssemblyName>
+    <RootNamespace>AAAccounter</RootNamespace>
+    <AssemblyName>AAAccounter</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10069.0</TargetPlatformVersion>
@@ -20,6 +20,8 @@
     <PackageCertificateKeyFile>AAAcounter_TemporaryKey.pfx</PackageCertificateKeyFile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -154,6 +156,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="AAAcounter_TemporaryKey.pfx" />
+    <None Include="app.config" />
     <None Include="ApplicationInsights.config" />
     <None Include="packages.config" />
   </ItemGroup>
